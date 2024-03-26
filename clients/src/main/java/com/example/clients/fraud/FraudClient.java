@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(
         name = "fraud"
+        // Comment out URL because I want to use load balancing and Eureka service.
 //        url = "${clients.fraud.url}"
 )
 public interface FraudClient {
