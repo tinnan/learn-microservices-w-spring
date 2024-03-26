@@ -18,10 +18,10 @@ Run `./mvnw -P build-docker-image package` in project root directory.
 Run `docker compose up -d`
 
 ## Try
-pgadmin: http://localhost:5050 - Password `password`\
-Eureka dashboard: http://localhost:8761\
-RabbiMQ dashboard: http://localhost:15672 - User `guest` Password `guest`\
-Zipkin: http://localhost:9411\
+pgadmin: http://localhost:5050 - Password `password` \
+Eureka dashboard: http://localhost:8761 \
+RabbiMQ dashboard: http://localhost:15672 - User `guest` Password `guest` \
+Zipkin: http://localhost:9411 \
 Customer API:
 ```
 POST http://localhost:8080/api/v1/customers
