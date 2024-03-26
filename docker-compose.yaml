@@ -2,6 +2,9 @@ services:
   postgres-customer:
     container_name: postgres-customer
     image: postgres
+    profiles:
+      - dev
+      - integrate
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: password
@@ -16,6 +19,9 @@ services:
   postgres-fraud:
     container_name: postgres-fraud
     image: postgres
+    profiles:
+      - dev
+      - integrate
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: password
@@ -30,6 +36,9 @@ services:
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4
+    profiles:
+      - dev
+      - integrate
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
@@ -45,6 +54,9 @@ services:
   zipkin:
     image: openzipkin/zipkin
     container_name: zipkin
+    profiles:
+      - dev
+      - integrate
     ports:
       - "9411:9411"
     networks:
@@ -52,6 +64,9 @@ services:
   rabbitmq:
     image: rabbitmq:3.9.11-management-alpine
     container_name: rabbitmq
+    profiles:
+      - dev
+      - integrate
     ports:
       - "5672:5672"
       - "15672:15672"
@@ -60,6 +75,8 @@ services:
   eureka-server:
     image: eureka-server:latest
     container_name: eureka-server
+    profiles:
+      - integrate
     ports:
       - "8761:8761"
     environment:
@@ -83,6 +100,8 @@ services:
   customer:
     image: customer:latest
     container_name: customer
+    profiles:
+      - integrate
     ports:
       - "8080:8080"
     environment:
@@ -97,6 +116,8 @@ services:
   fraud:
     image: fraud:latest
     container_name: fraud
+    profiles:
+      - integrate
     ports:
       - "8081:8081"
     environment:
@@ -111,6 +132,8 @@ services:
   notification:
     image: notification:latest
     container_name: notification
+    profiles:
+      - integrate
     ports:
       - "8082:8082"
     environment:
@@ -120,6 +143,34 @@ services:
     depends_on:
       - zipkin
       - rabbitmq
+  mongo:
+    image: mongo
+    container_name: mongodb
+    profiles:
+      - dev
+      - integrate
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      # This is the database to run creation script /docker-entrypoint-initdb.d/*.js
+      # But database to run script can also be switched from inside the script.
+#      MONGO_INITDB_DATABASE: notification
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+#    mongo-express:
+#      image: mongo-express
+#      restart: always
+#      profiles:
+#        - dev
+#        - integrate
+#      ports:
+#        - 8081:8081
+#      environment:
+#        ME_CONFIG_MONGODB_ADMINUSERNAME: root
+#        ME_CONFIG_MONGODB_ADMINPASSWORD: example
+#        ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
 networks:
   postgres-customer:
     driver: bridge

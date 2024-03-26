@@ -6,6 +6,15 @@ spring:
     name: notification
   profiles:
     active: default
+  data:
+    mongodb:
+      # User "noti" is created from mongo-init.js file being uploaded to mongodb container.
+#      uri: mongodb://noti:noti@localhost:27017/notification
+      database: notification
+      host: localhost
+      port: 27017
+      username: noti
+      password: noti
 
 # All traces should be sent to latency analysis tool
 management:

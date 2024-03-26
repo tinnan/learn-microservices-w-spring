@@ -15,7 +15,8 @@ The project uses `jib-maven-plugin` to containerize app and upload to local Dock
 Run `./mvnw -P build-docker-image package` in project root directory.
 
 ## Run
-Run `docker compose up -d`
+Run `docker compose --profile dev up -d` to only spin up containers for PostgreSQL, MongoDB, RabbitMQ, Zipkin, PgAdmin \
+Run `docker compose --profile integrate up -d` to start every service in container.
 
 ## Try
 pgadmin: http://localhost:5050 - Password `password` \

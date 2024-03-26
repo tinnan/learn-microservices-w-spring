@@ -12,9 +12,10 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class NotificationConsumer {
+    private final NotificationService notificationService;
     @RabbitListener(queues = Global.RABBIT_QUEUE_CUSTOMER)
-    public void notifyCustomer(Message message) {
-        log.info("Specific message received: {}", message.toString());
-        log.info("Notification sent to customer.");
+    public void customerCreated(CustomerCreatedMessage message) {
+        log.info("Customer created message: {}", message.toString());
+        notificationService.notifyCustomer(message);
     }
 }
