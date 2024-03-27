@@ -4,6 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
+/* This application is automatically a Eureka client
+by having spring-cloud-starter-netflix-eureka-client is the classpath.
+* */
 @SpringBootApplication(
         scanBasePackages = {
                 "com.example.notification",

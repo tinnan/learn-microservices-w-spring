@@ -16,6 +16,13 @@ spring:
       username: noti
       password: noti
 
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
+
 # All traces should be sent to latency analysis tool
 management:
   tracing:
