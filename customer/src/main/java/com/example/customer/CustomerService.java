@@ -2,6 +2,7 @@ package com.example.customer;
 
 import com.example.amqp.RabbitMQMessageProducer;
 import com.example.amqp.message.CustomerCreatedMessage;
+import com.example.clients.customer.CustomerRegistrationRequest;
 import com.example.clients.fraud.FraudCheckResponse;
 import com.example.clients.fraud.FraudClient;
 import com.example.common.Global;
