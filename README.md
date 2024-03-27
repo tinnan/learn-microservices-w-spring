@@ -35,5 +35,9 @@ Body:
 ```
 Fraud API:
 ```
-GET http://localhost:8080/api/v1/fraud-check/:customerId
+GET http://localhost:8081/api/v1/fraud-check/:customerId
+```
+Notification API:
+```
+GET http://localhost:8082/api/v1/notification/info
 ```
