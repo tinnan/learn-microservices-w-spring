@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+data:
+  POSTGRES_DB: learner
+  POSTGRES_USER: learner
+  POSTGRES_PASSWORD: password
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-init-script
+data:
+  postgres-init.sql: |-
+    CREATE DATABASE customer;
+    GRANT ALL PRIVILEGES ON DATABASE customer TO learner;
+    CREATE DATABASE fraud;
+    GRANT ALL PRIVILEGES ON DATABASE fraud TO learner;
