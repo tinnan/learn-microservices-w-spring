@@ -97,13 +97,14 @@
                             <tags>
                                 <tag>latest</tag>
                             </tags>
+                            <image>tinnan/${project.artifactId}:${project.version}</image>
                         </to>
                     </configuration>
                     <executions>
                         <execution>
                             <phase>package</phase>
                             <goals>
-                                <goal>dockerBuild</goal>
+                                <goal>build</goal>
                             </goals>
                         </execution>
                     </executions>
