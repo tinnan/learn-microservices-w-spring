@@ -140,9 +140,11 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     networks:
       - spring
+      - mongo
     depends_on:
       - zipkin
       - rabbitmq
+      - mongo
   mongo:
     image: mongo
     container_name: mongodb
@@ -159,6 +161,8 @@ services:
       - 27017:27017
     volumes:
       - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - mongo
 #    mongo-express:
 #      image: mongo-express
 #      restart: always
@@ -177,6 +181,8 @@ networks:
   postgres-fraud:
     driver: bridge
   spring:
+    driver: bridge
+  mongo:
     driver: bridge
 
 volumes:
