@@ -11,6 +11,7 @@ services:
       PGDATA: /data/postgres
     volumes:
       - postgres-customer:/data/postgres
+      - ./db-scripts/customer-init.sql:/docker-entrypoint-initdb.d/*.sql:ro
     ports:
       - "5432:5432"
     networks:
@@ -28,6 +29,7 @@ services:
       PGDATA: /data/postgres
     volumes:
       - postgres-fraud:/data/postgres
+      - ./db-scripts/fraud-init.sql:/docker-entrypoint-initdb.d/*.sql:ro
     ports:
       - "5433:5432"
     networks:
@@ -160,7 +162,7 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ./db-scripts/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     networks:
       - mongo
 #    mongo-express:
