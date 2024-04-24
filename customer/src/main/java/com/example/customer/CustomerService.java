@@ -18,7 +18,12 @@ public class CustomerService {
     private final RabbitMQMessageProducer rabbitMQMessageProducer;
 
     public Customer getCustomer(Integer id) {
-        return customerRepository.findById(id).orElse(null);
+        try {
+            Thread.sleep(3000);
+            return customerRepository.findById(id).orElse(null);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public Customer registerCustomer(CustomerRegistrationRequest customerRequest) {

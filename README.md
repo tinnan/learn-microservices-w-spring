@@ -61,3 +61,12 @@ Notification API:
 ```
 GET http://localhost:8082/api/v1/notification/info
 ```
+Product API:
+```
+POST http://localhost:8083/api/v1/product/apply
+Body:
+{
+   "customerId": 1,
+   "productId": "SCP-173"
+}
+```

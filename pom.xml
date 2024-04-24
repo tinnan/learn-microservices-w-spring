@@ -19,6 +19,7 @@
         <module>amqp</module>
         <module>common</module>
         <module>clients</module>
+        <module>product</module>
     </modules>
 
     <properties>
