@@ -17,6 +17,10 @@ public class CustomerService {
     private final FraudClient fraudClient;
     private final RabbitMQMessageProducer rabbitMQMessageProducer;
 
+    public Customer getCustomer(Integer id) {
+        return customerRepository.findById(id).orElse(null);
+    }
+
     public Customer registerCustomer(CustomerRegistrationRequest customerRequest) {
         Customer customer = Customer
                 .builder()
