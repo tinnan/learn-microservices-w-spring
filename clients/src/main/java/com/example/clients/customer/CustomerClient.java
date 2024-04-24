@@ -11,5 +11,5 @@ import org.springframework.web.bind.annotation.RequestBody;
 )
 public interface CustomerClient {
     @PostMapping(path = "/api/v1/customers")
-    public void registerCustomer(@RequestBody CustomerRegistrationRequest customerRequest);
+    CustomerRegistrationResponse registerCustomer(@RequestBody CustomerRegistrationRequest customerRequest);
 }

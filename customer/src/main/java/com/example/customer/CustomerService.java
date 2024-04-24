@@ -17,7 +17,7 @@ public class CustomerService {
     private final FraudClient fraudClient;
     private final RabbitMQMessageProducer rabbitMQMessageProducer;
 
-    public void registerCustomer(CustomerRegistrationRequest customerRequest) {
+    public Customer registerCustomer(CustomerRegistrationRequest customerRequest) {
         Customer customer = Customer
                 .builder()
                 .firstName(customerRequest.firstName())
@@ -25,9 +25,7 @@ public class CustomerService {
                 .email(customerRequest.email())
                 .build();
         // todo: check if email valid, not taken
-        // todo: store customer in db
         customerRepository.saveAndFlush(customer);
-        // todo: check if fraudster
         FraudCheckResponse fraudCheckResponse = fraudClient.isFraudster(
                 customer.getId());
 
@@ -37,5 +35,6 @@ public class CustomerService {
         // todo: send notification
         rabbitMQMessageProducer.publish(new CustomerCreatedMessage(customer.getId(), customer.getEmail()), Global.RABBIT_EXCHANGE,
                 "created");
+        return customer;
     }
 }

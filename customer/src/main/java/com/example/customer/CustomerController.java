@@ -2,11 +2,9 @@ package com.example.customer;
 
 import com.example.clients.customer.CustomerClient;
 import com.example.clients.customer.CustomerRegistrationRequest;
+import com.example.clients.customer.CustomerRegistrationResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
@@ -17,8 +15,9 @@ public class CustomerController implements CustomerClient {
     private final CustomerService customerService;
 
     @Override
-    public void registerCustomer(CustomerRegistrationRequest customerRequest) {
+    public CustomerRegistrationResponse registerCustomer(CustomerRegistrationRequest customerRequest) {
         log.info("new customer registration {}", customerRequest);
-        customerService.registerCustomer(customerRequest);
+        Customer customer = customerService.registerCustomer(customerRequest);
+        return new CustomerRegistrationResponse(customer.getId());
     }
 }
